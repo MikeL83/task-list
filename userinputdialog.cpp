@@ -10,9 +10,8 @@
 #include <QRegExpValidator>
 #include <QCloseEvent>
 
-UserInputDialog::UserInputDialog(const QString& title,
-                                 QWidget *parent) :
-    QDialog(parent)
+UserInputDialog::UserInputDialog(const QString &title, QWidget *parent)
+    : QDialog(parent)
 {
     createWidgets();
     createLayout();
@@ -27,13 +26,14 @@ void UserInputDialog::closeEvent(QCloseEvent *event)
     event->accept();
 }
 
-void UserInputDialog::createWidgets() {
+void UserInputDialog::createWidgets()
+{
     buttonBox =
         new QDialogButtonBox(QDialogButtonBox::Close | QDialogButtonBox::Ok);
     nameLabel = new QLabel(tr("Name:"));
     nameLineEdit = new QLineEdit;
     nameLineEdit->setValidator(
-        new QRegExpValidator(QRegExp("[\\D\\s]+"), this));
+        new QRegExpValidator(QRegExp("[A-Za-z\\s]+"), this));
     nameLineEdit->setMaxLength(100);
     nameLabel->setBuddy(nameLineEdit);
 
@@ -45,7 +45,8 @@ void UserInputDialog::createWidgets() {
     usernameLabel->setBuddy(usernameLineEdit);
 }
 
-void UserInputDialog::createLayout() {
+void UserInputDialog::createLayout()
+{
     QVBoxLayout *vLayout = new QVBoxLayout(this);
     vLayout->addWidget(nameLabel);
     vLayout->addWidget(nameLineEdit);
@@ -59,12 +60,13 @@ void UserInputDialog::createLayout() {
     setLayout(vLayout);
 }
 
-void UserInputDialog::createConnections() {
-    connect(buttonBox, SIGNAL(accepted()),
-            this, SLOT(acceptInput()));
+void UserInputDialog::createConnections()
+{
+    connect(buttonBox, SIGNAL(accepted()), this, SLOT(acceptInput()));
     connect(buttonBox, SIGNAL(rejected()), this, SLOT(close()));
 }
 
-void UserInputDialog::acceptInput() {
+void UserInputDialog::acceptInput()
+{
     emit accepted(nameLineEdit->text(), usernameLineEdit->text());
 }

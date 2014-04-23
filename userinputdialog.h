@@ -13,19 +13,19 @@ class QCloseEvent;
 class UserInputDialog : public QDialog
 {
     Q_OBJECT
-public:
-    explicit UserInputDialog(const QString&,
-                             QWidget *parent = 0);
-protected:
+  public:
+    explicit UserInputDialog(const QString &, QWidget *parent = 0);
+
+  protected:
     void closeEvent(QCloseEvent *event);
 
-signals:
-    void accepted(const QString&, const QString&);
+  signals:
+    void accepted(const QString &, const QString &);
 
-private slots:
-  void acceptInput();
+  private slots:
+    void acceptInput();
 
-private:
+  private:
     void createWidgets();
     void createLayout();
     void createConnections();

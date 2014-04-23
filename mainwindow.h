@@ -4,12 +4,14 @@
 #include <QMainWindow>
 #include <memory>
 #include <QModelIndex>
+#include <QVector>
 #include "userinputdialog.h"
 #include "tasksdb.h"
 #include "taskinputdialog.h"
 #include "reminderdialog.h"
 
-namespace Ui {
+namespace Ui
+{
 class MainWindow;
 }
 
@@ -24,38 +26,36 @@ class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
-public:
+  public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-protected:
-    void contextMenuEvent(QContextMenuEvent*);
+  protected:
+    void contextMenuEvent(QContextMenuEvent *);
 
 signals:
 
-private slots:
+  private
+slots:
     void importTask();
     void exportTask();
     void createUser();
     void openUser();
-    void openUserTasks(const QString&, const QString&);
-    void addUser(const QString&, const QString&);
+    void openUserTasks(const QString &, const QString &);
+    void addUser(const QString &, const QString &);
     void addNewTask();
-    void insertNewTask(const QString&, const QString&,
-                       const QString&, const QString&);
-    void editTask(const QModelIndex& index = QModelIndex());
-    void editNewTask(const QString&, const QString&,
-                     const QString&, const QString&);
+    void insertNewTask(const QString &, const QString &, const QString &,
+                       const QString &);
+    void editTask(const QModelIndex &index = QModelIndex());
+    void editNewTask(const QString &, const QString &, const QString &,
+                     const QString &);
     void deleteTask();
-    //void snoozeTask();
     void sendTask();
-    void sendTaskToOtherUser(const QString&, const QString&);
     void checkReminders();
-    void dismissReminder(const QString&, const QString&);
-    void snoozeReminder(const QString&, const QString&,
-                         const QString&);
+    void dismissReminder(const QString &, const QString &);
+    void snoozeReminder(const QString &, const QString &, const QString &);
 
-private:
+  private:
     Ui::MainWindow *ui;
 
     void createWidgets();
@@ -65,8 +65,6 @@ private:
     void createConnections();
     void clearModel();
 
-    //QLineEdit *locationEdit;
-    //QToolBar *toolBar;
     QMenu *fileMenu;
     QMenu *toolsMenu;
 
@@ -87,6 +85,7 @@ private:
     std::unique_ptr<UserInputDialog> userDialog;
     std::unique_ptr<TasksDB> tasksDB;
     std::unique_ptr<ReminderDialog> reminderDialog;
+    QVector<std::shared_ptr<ReminderDialog> > dialogs;
     QModelIndex currentIndex;
     QTimer *timerForRem;
 };

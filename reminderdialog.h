@@ -12,27 +12,24 @@ class QTimer;
 class ReminderDialog : public QDialog
 {
     Q_OBJECT
-public:
-    explicit ReminderDialog(const QString&, const QString&,
-                            const QString&, int,const QString&,
-                            const QString&, QWidget *parent = 0);
+  public:
+    explicit ReminderDialog(const QString &, const QString &, const QString &,
+                            int, const QString &, const QString &,
+                            QWidget *parent = 0);
 
-protected:
+  protected:
     void closeEvent(QCloseEvent *event);
 
-signals:
-    void dismiss(const QString&, const QString&);
-    void snooze(const QString&, const QString&,
-                const QString&);
-    //void accepted(const QString&, const QString&,
-    //              const QString&, const QString&);
+  signals:
+    void dismiss(const QString &, const QString &);
+    void snooze(const QString &, const QString &, const QString &);
 
-private slots:
+  private slots:
     void dismissDialog();
     void snoozeTask();
     void populateCombobox();
 
-private:
+  private:
     void createWidgets();
     void createLayout();
     void createConnections();
@@ -44,9 +41,10 @@ private:
     QComboBox *snoozeBox;
     QPushButton *dismissButton;
     QPushButton *snoozeButton;
-    std::tuple<QString,QString,QString,int,QString,QString> inputs;
+    std::tuple<QString, QString, QString, int, QString, QString> inputs;
     QTimer *timer;
 
+    Q_DISABLE_COPY(ReminderDialog)
 };
 
 #endif // REMINDERDIALOG_H
