@@ -6,8 +6,7 @@
 
 QT       += core gui sql
 
-QMAKE_CXX = clang++
-QMAKE_CXXFLAGS = -std=c++11 -O2 -Wall -pedantic -Wextra
+CONFIG   += c++11
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
